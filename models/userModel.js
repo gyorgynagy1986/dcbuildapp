@@ -5,8 +5,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs'); 
 const { stringify } = require('querystring');
 
-const Product = require('./productModel');
-
+// const Product = require('./productModel');
 
 const userSchema = new mongoose.Schema({
     
@@ -66,8 +65,6 @@ const userSchema = new mongoose.Schema({
         select: false // not shown by the post request in the user data (only in the database)
     },
     
-   
-
 },
 );
 

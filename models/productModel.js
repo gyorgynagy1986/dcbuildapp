@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-const mongoose = require('mongoose'); //DRIVER HELPS FOR CONNECTING TO THE DATBASE //INSTALL= npm i mongoose@5 (version 5.)
-// const User = require('./userModel');
+const mongoose = require('mongoose'); 
 const { default: slugify } = require('slugify');
 // const validator = require('validator');
 const User = require('./userModel');
@@ -12,7 +11,7 @@ const User = require('./userModel');
         unique: true,
         trim: true,
         maxlength: [40, 'product name has to be less or equal than 40 characters'],
-        minlength: [5, 'product name has to be more or equal than 10 characters'],
+        minlength: [3, 'product name has to be more or equal than 3 characters'],
        // validate: [validator.isAlpha, 'The name must only contain caracters']
     },
 
@@ -24,27 +23,41 @@ const User = require('./userModel');
         default:1000
     },
 
-    priceDiscount: {
+    amountOfDiscount: {
         type: Number,
-        validate: {
-            validator: function(val) {
-                return val < this.price; // 10
-              },
-              message: 'Discount price ({VALUE}) should be below regular price'
-            }
-         
+    }, 
+    
+    brand: {
+        type:String,
+        default:'default'
     },
         
     description: {
         type: String,
         trim: true,
-        default: 'This a prduct without any description'
+        default: 'This is a product without any description'
     },
+
+    pricePerDb: {
+        type: Number,
+        trim: true,
+        default: 1000
+    },
+
+    shop: {
+        type: String,
+        trim: true,
+        default: 'Tesco, Coop, Lidl, Zsuzsi néni kisbolt, etc.'
+    },
+
 
     imageCover: {
         type: String,
-        default: 'tour-7-1.jpg',
-       // required:[false, 'A tour must have an image']
+        default: 'proddefault.jpg',
+    },
+    visibility: {
+        type: Boolean,
+        default: true
     },
 
     
@@ -62,10 +75,25 @@ const User = require('./userModel');
     }
 ); 
 
-productSchema.index({price: 1, ratingsAverage: -1 });
+productSchema.index({price: 1 });
 productSchema.index({slug: 1}); 
 
 
+// Product visibility 
+
+//roductSchema.pre(/^find/, function(next) { ///^find/ = all the strings that starts as find
+//   // tourSchema.pre('find', function(next) {
+//   this.find({visibility: {$ne: false}})
+//       next();
+//   });
+//
+
+// Calculate the DISCOUNTED PRICE
+
+productSchema.virtual('discountedPrice').get(function() {
+    return this.price - this.price * (this.amountOfDiscount / 100);
+});
+        
 
 // DOCUMNET MEDDELWARE : runs beforete .save() command and  .create() command.
 productSchema.pre('save', function(next) {
@@ -74,9 +102,7 @@ productSchema.pre('save', function(next) {
 });
 
 
-
 const Product = mongoose.model('Product', productSchema);
-
 module.exports = Product;
 
 

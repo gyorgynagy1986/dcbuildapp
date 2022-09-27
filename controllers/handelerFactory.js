@@ -17,7 +17,6 @@ exports.DeleteOne = Model =>
     });
   });
 
-
 exports.UpdateOne = Model =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
@@ -48,7 +47,6 @@ exports.UpdateOne = Model =>
       },
     });
   });
-
 
 exports.getOne = (Model, popOption) => 
   catchAsync(async (req, res, next) => {
@@ -84,8 +82,7 @@ exports.getAll = Model =>
         .paginate();
     const doc = await features.query;
   // const doc = await features.query.explain();
-
-    
+  
      //SEND RESPOND
 
      res.status(200).json({

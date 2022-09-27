@@ -4,9 +4,7 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const multer = require('multer');
 
-
 // const upload = multer ({ dest: 'public/img/users/uploadedPhotos'});
-
 
 const router = express.Router();
     
@@ -42,8 +40,6 @@ router
 
 
 router.use(authController.restrictTo('admin'));
-
-router.post('/getOnebyEmail', userController.getOnebyEmail);
     
 router
     .route('/')

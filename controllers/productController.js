@@ -15,9 +15,26 @@ exports.deleteProduct = factory.DeleteOne(Product);
 exports.updateProduct = factory.UpdateOne(Product);
 
 
+exports.publickProduct = catchAsync(async (req, res, next) => {
+
+    const product = await Product.aggregate([
+
+        {   
+            // $match: { role: "guide"}
+             $match: { visibility: true }},
+
+        {
+            $sort: {
+              name: 1
+            }
+        },
+    ]);
 
 
-
-
+    res.status(200).json({
+        status: 'success',
+        data: product
+    });
+});
 
 

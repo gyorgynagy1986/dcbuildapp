@@ -22,7 +22,6 @@ const handleValidationErrorDB = err => {
 const handleJWRError = () => new AppError('Invalid token, please login again', 401);
 const handleJWRExpiredError = () => new AppError('Your token has expired please login again', 401);
 
-
 const sendErrorDev = (err, req, res) => {
 
         //API

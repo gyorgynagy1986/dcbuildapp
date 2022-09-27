@@ -2,8 +2,14 @@
 const express = require('express');
 const productController = require('../controllers/productController');
 const authController = require('../controllers/authController');
+const listRouter = require('./../routes/shoppingListRouter');
+
 
 const router = express.Router();
+
+router.route('/publickProduct').get(productController.publickProduct);
+
+router.use('/:productId', listRouter);
 
 router
   .route('/')

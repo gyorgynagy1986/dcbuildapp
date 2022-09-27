@@ -18,6 +18,7 @@ const globalErrorHandler = require('./controllers/errorController');
 // ROUTERS 
 const productRouter = require('./routes/productRouters');
 const userRouter = require('./routes/userRouter');
+const shoppingRouter = require('./routes/shoppingListRouter');
 
 // Start express APP! 
 
@@ -31,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //  Set security HTTP headers
-// app.use(helmet());
+ app.use(helmet());
 
 // Development logging 
 console.log(process.env.NODE_ENV)
@@ -47,7 +48,6 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// FUNCTION THAT MODIFY THE INCOMING REQUEST DATa (CALLED MIDDLEWARE, stay middle the request and the data)
 // Bod parser, reading data form body into req.body
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
@@ -61,12 +61,7 @@ app.use(xss());
 // prevent parameter pollution
 app.use(hpp( {
     whitelist: [
-        'duration',
-        'ratingsQuantity',
-        'ratingsAverage',
-        'maxGroupSize',
-        'difficulty',
-        'price'
+        'example'
     ]
 }));
 
@@ -88,16 +83,14 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/', shoppingRouter);
 
 
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
-
-
 app.use(globalErrorHandler);
-
 
 module.exports = app;
 
