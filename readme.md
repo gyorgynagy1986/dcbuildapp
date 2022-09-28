@@ -1,4 +1,4 @@
-# DiscontChecker App
+# DiscountChecker App
 
 Active functions: 
 
