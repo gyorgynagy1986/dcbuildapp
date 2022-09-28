@@ -10,6 +10,7 @@ exports.setListUserIds = (req, res, next) => {
     next();
 }
 
+// THIS TAKES THE PACKAGE FROM GLOBAL PRODUCT  
 
 exports.getMyShoppingList = catchAsync (async (req, res, ) => {
 
@@ -29,8 +30,23 @@ exports.getMyShoppingList = catchAsync (async (req, res, ) => {
   });
 
 
-  
+  // THIS TAKES THE USER SOPPING LIST FROM THE SHOPPLING MODELS 
 
+  exports.getMyList = catchAsync (async (req, res, next ) => {
+
+    // 1) FIND THE USER BY ID
+  
+    const list = await List.find({user : req.user.id})
+  
+    // 2) FIND THE SHOPPING LIST CREATED BY THE USER LOGGED IN 
+
+    const products = await List.find({ _id: {$in: list}});
+
+    res.status(200).json({
+        status: 'success',
+        data: products
+    })
+  });
 
 
 exports.createList = factory.CreateOne(List);

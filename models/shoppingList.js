@@ -7,11 +7,12 @@ const shoppingListSchema = new mongoose.Schema({
         ref:'User',
         require: [true, 'required']
     },
+    
 
     product: {
         type: mongoose.Schema.ObjectId,
         ref:'Product',
-        required: [true, 'required'],
+        required: [true, 'required']
     },
 
     createAt: {
@@ -19,13 +20,30 @@ const shoppingListSchema = new mongoose.Schema({
         default: Date.now()
     },
     
-  
-});
+},
+
+{   
+    toJSON: { virtuals: true},
+    toObject: { virtuals: true}
+}
+
+);
 
 shoppingListSchema.pre(/^find/, function(next) {
     this.populate({path:'user', select:'name'});
     next();
 });
+
+// Query middleware to list all the date of PRODUCT at SHOPPING LIST
+
+shoppingListSchema.pre(/^find/, function(next) {
+    this.populate({
+        path: 'product',
+        select: '' 
+    });
+    next();
+});
+
 
 const List = mongoose.model('List', shoppingListSchema);
 

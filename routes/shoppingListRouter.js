@@ -8,7 +8,8 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
-router.route('/getMyshippingList').get(shoppingController.getMyShoppingList);
+router.route('/getMyshippingList').get(shoppingController.getMyList);
+
 router.route('/getAllList').get(shoppingController.getAllList, productController.publickProduct);
 
 router.route('/')
