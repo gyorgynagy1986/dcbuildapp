@@ -10,12 +10,12 @@ router.use(authController.protect);
 
 router.route('/getMyshippingList').get(shoppingController.getMyList);
 
-router.route('/getAllList').get(shoppingController.getAllList, productController.publickProduct);
+router.route('/getAllList').get(authController.restrictTo('admin'), shoppingController.getAllList, productController.publickProduct);
 
 router.route('/')
       .get(shoppingController.getAllList)
       .post(
-            authController.restrictTo('user', 'admin'),
+            authController.restrictTo('admin'),
             shoppingController.setListUserIds,
             shoppingController.createList
         );

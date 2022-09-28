@@ -34,7 +34,7 @@ shoppingListSchema.pre(/^find/, function(next) {
     next();
 });
 
-// Query middleware to list all the date of PRODUCT at SHOPPING LIST
+// Query middleware to list all the DATE of PRODUCT at SHOPPING LIST
 
 shoppingListSchema.pre(/^find/, function(next) {
     this.populate({

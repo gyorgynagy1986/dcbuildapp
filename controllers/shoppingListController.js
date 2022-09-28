@@ -44,6 +44,7 @@ exports.getMyShoppingList = catchAsync (async (req, res, ) => {
 
     res.status(200).json({
         status: 'success',
+        db: products.length,
         data: products
     })
   });
