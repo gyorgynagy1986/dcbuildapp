@@ -1,5 +1,5 @@
 const Product = require('../models/productModel');
-const List = require('../models/shoppingList');
+const List = require('../models/shoppingListModel');
 const factory = require('../controllers/handelerFactory');
 const catchAsync = require('../utils/catchAsync');
 
@@ -9,6 +9,7 @@ exports.setListUserIds = (req, res, next) => {
     if(!req.body.user) req.body.user = req.user.id;
     next();
 }
+
 
 // THIS TAKES THE PACKAGE FROM GLOBAL PRODUCT  
 
@@ -41,10 +42,29 @@ exports.getMyShoppingList = catchAsync (async (req, res, ) => {
     // 2) FIND THE SHOPPING LIST CREATED BY THE USER LOGGED IN 
 
     const products = await List.find({ _id: {$in: list}});
-
+    
     res.status(200).json({
         status: 'success',
         db: products.length,
+        data: products
+    })
+  })
+
+
+  // REMOVE ALL SHOPING LIST FROM THE USER PROFILE 
+
+  exports.deleteAllShoppingList = catchAsync (async (req, res, next ) => {
+
+    // 1) FIND THE USER BY ID
+  
+    const list = await List.find({user : req.user.id})
+  
+    // 2) FIND THE SHOPPING LIST CREATED BY THE USER AND REMOVE
+
+    const products = await List.deleteMany({ _id: {$in: list}});
+    
+    res.status(200).json({
+        status: 'success',
         data: products
     })
   });

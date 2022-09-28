@@ -108,7 +108,7 @@ const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, {
         // 2) Verification token (importnat)
 
          const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-            console.log(decoded);
+            console.log(decoded, 'hello');
             
         // 3) Chech if user still exist 
          const currentUser = await User.findById(decoded.id);
