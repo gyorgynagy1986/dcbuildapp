@@ -55,10 +55,10 @@ const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, {
             
         const url = `${req.protocol}://localhost:3000/me`;
             
-      //  if (process.env.NODE_ENV === 'production') {
-      //      url = `${req.protocol}://${req.get('host')}/me`;
-      //      }       
-      //      
+        if (process.env.NODE_ENV === 'production') {
+            url = `${req.protocol}://${req.get('host')}/me`;
+            }       
+            
        
       /*await new Email(newUser, url).sendWelcome(); */
        

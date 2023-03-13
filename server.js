@@ -2,6 +2,7 @@
 const mongoose = require('mongoose'); //DRIVER HELPS FOR CONNECTING TO THE DATBASE //INSTALL= npm i mongoose@5 (version 5.)
 const dotenv = require('dotenv');
 const cors = require("cors");
+const { convert } = require('html-to-text');
 
 process.on('uncaughtExpection', err => {
   console.log(err.name, err.message);
