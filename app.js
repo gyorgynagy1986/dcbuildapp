@@ -11,7 +11,7 @@ const hpp = require('hpp');
 const cookieparser = require('cookie-parser');
 const cors = require("cors");
 const compression = require('compression')
-const { convert } = require('html-to-text');
+const htmlToText = require('html-to-text');
 
 // OWN Handlerers
 const AppError = require('./utils/appError');
@@ -27,11 +27,11 @@ const shoppingRouter = require('./routes/shoppingListRouter');
 const app = express();
 
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 
 // 1 ) GLOBAL MIDDLEWARES
 //     Serving static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 //  Set security HTTP headers
  app.use(helmet());

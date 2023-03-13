@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs'); 
 const { stringify } = require('querystring');
+const htmlToText = require('html-to-text');
 
 // const Product = require('./productModel');
 

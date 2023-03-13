@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 const mongoose = require('mongoose'); 
 const { default: slugify } = require('slugify');
+const htmlToText = require('html-to-text');
+
     //const validator = require('validator');
 
  const productSchema = new mongoose.Schema({
