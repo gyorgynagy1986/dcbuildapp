@@ -23,18 +23,17 @@ exports.publickProduct = catchAsync(async (req, res, next) => {
             // $match: { role: "guide"}
              $match: { visibility: true }},
 
-        {
-            $sort: {
-              name: 1
-            }
-        },
+       // {
+       //    // $sort: {
+       //    //   name: 1
+       //    // }
+       // },
     ]);
-
 
     res.status(200).json({
         status: 'success',
-        db:product.length,
-        data: product
+       db:product.length,
+       product
     });
 });
 

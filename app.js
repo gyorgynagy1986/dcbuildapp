@@ -9,7 +9,8 @@ const mongoSanitize= require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieparser = require('cookie-parser');
-const compression = require('compression');
+const cors = require("cors");
+const compression = require('compression')
 
 // OWN Handlerers
 const AppError = require('./utils/appError');
@@ -80,7 +81,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTERS
-
+app.use(cors());
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/', shoppingRouter);

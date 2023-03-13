@@ -1,6 +1,7 @@
  /* eslint-disable prettier/prettier */
 const mongoose = require('mongoose'); //DRIVER HELPS FOR CONNECTING TO THE DATBASE //INSTALL= npm i mongoose@5 (version 5.)
 const dotenv = require('dotenv');
+const cors = require("cors");
 
 process.on('uncaughtExpection', err => {
   console.log(err.name, err.message);
@@ -29,7 +30,7 @@ mongoose
     console.log('DB connection sucesfull');
   });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 // eslint-disable-next-line prettier/prettier
 const server = app.listen(port, () => {
   // eslint-disable-next-line no-console
