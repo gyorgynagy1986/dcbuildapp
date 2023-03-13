@@ -31,20 +31,28 @@ mongoose
     console.log('DB connection sucesfull');
   });
 
-const port = process.env.PORT || 5000;
-// eslint-disable-next-line prettier/prettier
-const server = app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`App runing on port ${port}... `);
-});
+  const host = '0.0.0.0';
+  const port = process.env.PORT || 3000;
 
-process.on('unhandledRejection' , err => {
-  console.log(err.name, err.message);
-  console.log('UNHANDLED REJECTION! Shutting down...');
-  server.close(() => {
-    process.exit(1);
+
+  app.listen(port, host, function() {
+    console.log("Server started.......");
   });
-});
+
+//const port = process.env.PORT || 5000;
+//// eslint-disable-next-line prettier/prettier
+//const server = app.listen(port, () => {
+//  // eslint-disable-next-line no-console
+//  console.log(`App runing on port ${port}... `);
+//});
+//
+//process.on('unhandledRejection' , err => {
+//  console.log(err.name, err.message);
+//  console.log('UNHANDLED REJECTION! Shutting down...');
+//  server.close(() => {
+//    process.exit(1);
+//  });
+//});
 
 
 
