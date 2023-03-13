@@ -4,7 +4,8 @@
   "description": "listing the weekely discounts",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "set NODE_ENV=production&& nodemon server.js",
+    //"start": "nodemon server.js",
     "start:prod": "set NODE_ENV=production&& nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js --public-url /js",
