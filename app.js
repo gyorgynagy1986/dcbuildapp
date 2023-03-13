@@ -11,6 +11,7 @@ const hpp = require('hpp');
 const cookieparser = require('cookie-parser');
 const cors = require("cors");
 const compression = require('compression')
+const { convert } = require('html-to-text');
 
 // OWN Handlerers
 const AppError = require('./utils/appError');
