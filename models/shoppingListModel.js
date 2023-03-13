@@ -8,13 +8,17 @@ const shoppingListSchema = new mongoose.Schema({
         require: [true, 'required']
     },
     
-
     product: {
         type: mongoose.Schema.ObjectId,
         ref:'Product',
         required: [true, 'required']
     },
 
+    count: {
+        type: Number,
+        default:1
+    },
+        
     createAt: {
         type: Date,
         default: Date.now()
@@ -28,6 +32,8 @@ const shoppingListSchema = new mongoose.Schema({
 }
 
 );
+
+
 
 shoppingListSchema.pre(/^find/, function(next) {
     this.populate({path:'user', select:'name'});
@@ -43,6 +49,9 @@ shoppingListSchema.pre(/^find/, function(next) {
     });
     next();
 });
+
+
+
 
 
 const List = mongoose.model('List', shoppingListSchema);
