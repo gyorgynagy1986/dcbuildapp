@@ -48,6 +48,8 @@ const limiter = rateLimit({
     windowMs: 60 * 60 * 1000, 
     message: 'To many request from this IP, pelase try agan later!'
 });
+
+
 app.use('/api', limiter);
 
 // Bod parser, reading data form body into req.body
