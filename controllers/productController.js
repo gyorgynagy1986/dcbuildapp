@@ -17,11 +17,11 @@ exports.updateProduct = factory.UpdateOne(Product);
 
 exports.publickProduct = catchAsync(async (req, res, next) => {
 
-    const product = await Product.aggregate([
+    const products = await Product.aggregate([
 
         {   
             // $match: { role: "guide"}
-             $match: { visibility: true }},
+             $match: { visibility: true  }},
 
        // {
        //    // $sort: {
@@ -32,8 +32,8 @@ exports.publickProduct = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-       db:product.length,
-       product
+       db:products.length,
+       products
     });
 });
 

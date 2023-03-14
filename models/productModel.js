@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 const mongoose = require('mongoose'); 
 const { default: slugify } = require('slugify');
-const htmlToText = require('html-to-text');
 
     //const validator = require('validator');
 
@@ -95,11 +94,11 @@ const htmlToText = require('html-to-text');
 
 // Product visibility 
 
-productSchema.pre(/^find/, function(next) { ///^find/ = all the strings that starts as find
-   // tourSchema.pre('find', function(next) {
-   this.find({visibility: {$ne: false}})
-       next();
-   });
+// productSchema.pre(/^find/, function(next) { ///^find/ = all the strings that starts as find
+//    // tourSchema.pre('find', function(next) {
+//    this.find({visibility: {$ne: true}})
+//        next();
+//    });
 
 
 // Calculate the DISCOUNTED PRICE
